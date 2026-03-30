@@ -15,11 +15,11 @@
   "sections": {
     "hero_jVaWmY": {
       "settings": {
-        "content_direction": "column",
-        "open_in_new_tab": true,
-        "stack_media_on_mobile": true,
+        "image_2": "shopify://shop_images/Frame_2087327530_22.png",
         "custom_mobile_media": false,
-        "image_2": "shopify://shop_images/Frame_2087327530_22.png"
+        "open_in_new_tab": true,
+        "content_direction": "column",
+        "stack_media_on_mobile": true
       },
       "blocks": {}
     }
