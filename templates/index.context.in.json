@@ -16,10 +16,10 @@
     "hero_jVaWmY": {
       "settings": {
         "image_2": "shopify://shop_images/Frame_2087327530_22.png",
-        "custom_mobile_media": false,
         "open_in_new_tab": true,
         "content_direction": "column",
-        "stack_media_on_mobile": true
+        "stack_media_on_mobile": true,
+        "custom_mobile_media": true
       },
       "blocks": {}
     }
