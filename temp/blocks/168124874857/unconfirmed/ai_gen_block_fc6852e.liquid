@@ -1,6 +1,889 @@
+{% doc %}
+  @prompt
+    Create a fully responsive, pixel-perfect "Why Choose Us / Ingredient Transparency" section for a health supplements store. The section should include:
+    
+    1. **Hero Banner** at the top with:
+       - A bold headline like "There's A New Way To Support Your Joints"
+       - 3 bullet points with icons listing key benefits
+       - A "Shop Now" CTA button
+       - Background with a green gradient and a product image on the right side with floating ingredient images
+    
+    2. **Trust Bar** below the hero with:
+       - A dark background strip with centered text: "We Believe In Ingredient Transparency & Source Only The Highest Quality Ingredients"
+    
+    3. **3 Icon Feature Row** with icons and short text for:
+       - "Supplements Enriched with Whole Foods"
+       - "No Fillers, Preservatives or Artificial Additives"
+       - "Research-Backed Ingredients"
+    
+    All elements should be fully customizable via theme editor settings (text, colors, images, button labels/links). Design should be clean, modern, green-themed, and pixel-perfect on mobile and desktop.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-ingredient-transparency-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-hero-section-{{ ai_gen_id }} {
+    position: relative;
+    background: linear-gradient(135deg, {{ block.settings.hero_gradient_start }}, {{ block.settings.hero_gradient_end }});
+    padding: 60px 20px;
+    overflow: hidden;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-hero-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-hero-content-{{ ai_gen_id }} {
+    color: {{ block.settings.hero_text_color }};
+  }
+
+  .ai-hero-headline-{{ ai_gen_id }} {
+    font-size: {{ block.settings.headline_size }}px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 30px 0;
+    color: {{ block.settings.hero_text_color }};
+  }
+
+  .ai-hero-benefits-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+  }
+
+  .ai-hero-benefit-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: {{ block.settings.benefit_text_size }}px;
+    color: {{ block.settings.hero_text_color }};
+  }
+
+  .ai-hero-benefit-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.benefit_icon_size }}px;
+    height: {{ block.settings.benefit_icon_size }}px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.benefit_icon_bg }};
+    border-radius: 50%;
+    color: {{ block.settings.benefit_icon_color }};
+  }
+
+  .ai-hero-benefit-icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.benefit_icon_size }}px * 0.5);
+    height: calc({{ block.settings.benefit_icon_size }}px * 0.5);
+  }
+
+  .ai-hero-cta-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 16px 40px;
+    background-color: {{ block.settings.cta_bg_color }};
+    color: {{ block.settings.cta_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.cta_border_radius }}px;
+    font-size: {{ block.settings.cta_text_size }}px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ai-hero-cta-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.cta_hover_bg_color }};
+    color: {{ block.settings.cta_hover_text_color }};
+    transform: translateY(-2px);
+  }
+
+  .ai-hero-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-hero-main-image-{{ ai_gen_id }} {
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-hero-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-hero-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    opacity: 0.3;
+  }
+
+  .ai-floating-ingredient-{{ ai_gen_id }} {
+    position: absolute;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+  }
+
+  .ai-floating-ingredient-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-floating-1-{{ ai_gen_id }} {
+    width: {{ block.settings.floating_image_size }}px;
+    height: {{ block.settings.floating_image_size }}px;
+    top: 10%;
+    right: 5%;
+  }
+
+  .ai-floating-2-{{ ai_gen_id }} {
+    width: {{ block.settings.floating_image_size | times: 0.8 }}px;
+    height: {{ block.settings.floating_image_size | times: 0.8 }}px;
+    bottom: 15%;
+    right: 10%;
+  }
+
+  .ai-floating-3-{{ ai_gen_id }} {
+    width: {{ block.settings.floating_image_size | times: 0.9 }}px;
+    height: {{ block.settings.floating_image_size | times: 0.9 }}px;
+    top: 50%;
+    left: 5%;
+  }
+
+  .ai-trust-bar-{{ ai_gen_id }} {
+    background-color: {{ block.settings.trust_bar_bg }};
+    padding: 25px 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .ai-trust-bar-text-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: {{ block.settings.trust_bar_text_size }}px;
+    color: {{ block.settings.trust_bar_text_color }};
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .ai-features-section-{{ ai_gen_id }} {
+    padding: 60px 20px;
+    background-color: {{ block.settings.features_bg }};
+    width: 100%;
+  }
+
+  .ai-features-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .ai-feature-item-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .ai-feature-icon-wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.feature_icon_size }}px;
+    height: {{ block.settings.feature_icon_size }}px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.feature_icon_bg }};
+    border-radius: 50%;
+    color: {{ block.settings.feature_icon_color }};
+  }
+
+  .ai-feature-icon-wrapper-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.feature_icon_size }}px * 0.5);
+    height: calc({{ block.settings.feature_icon_size }}px * 0.5);
+  }
+
+  .ai-feature-icon-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+
+  .ai-feature-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.feature_title_size }}px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: {{ block.settings.features_text_color }};
+  }
+
+  .ai-feature-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.feature_text_size }}px;
+    color: {{ block.settings.features_text_color }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-hero-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .ai-hero-headline-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.headline_size }}px * 0.7);
+    }
+
+    .ai-hero-image-wrapper-{{ ai_gen_id }} {
+      order: -1;
+    }
+
+    .ai-features-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .ai-floating-ingredient-{{ ai_gen_id }} {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-hero-section-{{ ai_gen_id }} {
+      padding: 40px 20px;
+    }
+
+    .ai-hero-headline-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.headline_size }}px * 0.6);
+    }
+
+    .ai-hero-benefit-item-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.benefit_text_size }}px * 0.9);
+    }
+
+    .ai-trust-bar-text-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.trust_bar_text_size }}px * 0.9);
+    }
+
+    .ai-features-section-{{ ai_gen_id }} {
+      padding: 40px 20px;
+    }
+  }
+{% endstyle %}
+
+<ingredient-transparency-{{ ai_gen_id }} class="ai-ingredient-transparency-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-hero-section-{{ ai_gen_id }}">
+    <div class="ai-hero-container-{{ ai_gen_id }}">
+      <div class="ai-hero-content-{{ ai_gen_id }}">
+        {% if block.settings.hero_headline != blank %}
+          <h2 class="ai-hero-headline-{{ ai_gen_id }}">{{ block.settings.hero_headline }}</h2>
+        {% endif %}
+
+        <ul class="ai-hero-benefits-{{ ai_gen_id }}">
+          {% if block.settings.benefit_1_text != blank %}
+            <li class="ai-hero-benefit-item-{{ ai_gen_id }}">
+              <div class="ai-hero-benefit-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span>{{ block.settings.benefit_1_text }}</span>
+            </li>
+          {% endif %}
+
+          {% if block.settings.benefit_2_text != blank %}
+            <li class="ai-hero-benefit-item-{{ ai_gen_id }}">
+              <div class="ai-hero-benefit-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span>{{ block.settings.benefit_2_text }}</span>
+            </li>
+          {% endif %}
+
+          {% if block.settings.benefit_3_text != blank %}
+            <li class="ai-hero-benefit-item-{{ ai_gen_id }}">
+              <div class="ai-hero-benefit-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span>{{ block.settings.benefit_3_text }}</span>
+            </li>
+          {% endif %}
+        </ul>
+
+        {% if block.settings.cta_text != blank %}
+          <a href="{{ block.settings.cta_link }}" class="ai-hero-cta-{{ ai_gen_id }}">
+            {{ block.settings.cta_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="ai-hero-image-wrapper-{{ ai_gen_id }}">
+        {% if block.settings.hero_product_image %}
+          <img
+            src="{{ block.settings.hero_product_image | image_url: width: 600 }}"
+            alt="{{ block.settings.hero_product_image.alt | escape }}"
+            class="ai-hero-main-image-{{ ai_gen_id }}"
+            loading="lazy"
+            width="600"
+            height="600"
+          >
+        {% else %}
+          <div class="ai-hero-image-placeholder-{{ ai_gen_id }}">
+            {{ 'product-1' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.floating_image_1 %}
+          <div class="ai-floating-ingredient-{{ ai_gen_id }} ai-floating-1-{{ ai_gen_id }}">
+            <img
+              src="{{ block.settings.floating_image_1 | image_url: width: 200 }}"
+              alt="{{ block.settings.floating_image_1.alt | escape }}"
+              loading="lazy"
+            >
+          </div>
+        {% endif %}
+
+        {% if block.settings.floating_image_2 %}
+          <div class="ai-floating-ingredient-{{ ai_gen_id }} ai-floating-2-{{ ai_gen_id }}">
+            <img
+              src="{{ block.settings.floating_image_2 | image_url: width: 200 }}"
+              alt="{{ block.settings.floating_image_2.alt | escape }}"
+              loading="lazy"
+            >
+          </div>
+        {% endif %}
+
+        {% if block.settings.floating_image_3 %}
+          <div class="ai-floating-ingredient-{{ ai_gen_id }} ai-floating-3-{{ ai_gen_id }}">
+            <img
+              src="{{ block.settings.floating_image_3 | image_url: width: 200 }}"
+              alt="{{ block.settings.floating_image_3.alt | escape }}"
+              loading="lazy"
+            >
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% if block.settings.trust_bar_text != blank %}
+    <div class="ai-trust-bar-{{ ai_gen_id }}">
+      <p class="ai-trust-bar-text-{{ ai_gen_id }}">{{ block.settings.trust_bar_text }}</p>
+    </div>
+  {% endif %}
+
+  <div class="ai-features-section-{{ ai_gen_id }}">
+    <div class="ai-features-container-{{ ai_gen_id }}">
+      <div class="ai-feature-item-{{ ai_gen_id }}">
+        <div class="ai-feature-icon-wrapper-{{ ai_gen_id }}">
+          {% if block.settings.feature_1_icon %}
+            <img
+              src="{{ block.settings.feature_1_icon | image_url: width: 100 }}"
+              alt="{{ block.settings.feature_1_icon.alt | escape }}"
+              class="ai-feature-icon-image-{{ ai_gen_id }}"
+              loading="lazy"
+            >
+          {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          {% endif %}
+        </div>
+        {% if block.settings.feature_1_title != blank %}
+          <h3 class="ai-feature-title-{{ ai_gen_id }}">{{ block.settings.feature_1_title }}</h3>
+        {% endif %}
+        {% if block.settings.feature_1_text != blank %}
+          <p class="ai-feature-text-{{ ai_gen_id }}">{{ block.settings.feature_1_text }}</p>
+        {% endif %}
+      </div>
+
+      <div class="ai-feature-item-{{ ai_gen_id }}">
+        <div class="ai-feature-icon-wrapper-{{ ai_gen_id }}">
+          {% if block.settings.feature_2_icon %}
+            <img
+              src="{{ block.settings.feature_2_icon | image_url: width: 100 }}"
+              alt="{{ block.settings.feature_2_icon.alt | escape }}"
+              class="ai-feature-icon-image-{{ ai_gen_id }}"
+              loading="lazy"
+            >
+          {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          {% endif %}
+        </div>
+        {% if block.settings.feature_2_title != blank %}
+          <h3 class="ai-feature-title-{{ ai_gen_id }}">{{ block.settings.feature_2_title }}</h3>
+        {% endif %}
+        {% if block.settings.feature_2_text != blank %}
+          <p class="ai-feature-text-{{ ai_gen_id }}">{{ block.settings.feature_2_text }}</p>
+        {% endif %}
+      </div>
+
+      <div class="ai-feature-item-{{ ai_gen_id }}">
+        <div class="ai-feature-icon-wrapper-{{ ai_gen_id }}">
+          {% if block.settings.feature_3_icon %}
+            <img
+              src="{{ block.settings.feature_3_icon | image_url: width: 100 }}"
+              alt="{{ block.settings.feature_3_icon.alt | escape }}"
+              class="ai-feature-icon-image-{{ ai_gen_id }}"
+              loading="lazy"
+            >
+          {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          {% endif %}
+        </div>
+        {% if block.settings.feature_3_title != blank %}
+          <h3 class="ai-feature-title-{{ ai_gen_id }}">{{ block.settings.feature_3_title }}</h3>
+        {% endif %}
+        {% if block.settings.feature_3_text != blank %}
+          <p class="ai-feature-text-{{ ai_gen_id }}">{{ block.settings.feature_3_text }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</ingredient-transparency-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class IngredientTransparency{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.initFloatingAnimation();
+      }
+
+      initFloatingAnimation() {
+        const floatingElements = this.querySelectorAll('.ai-floating-ingredient-{{ ai_gen_id }}');
+        
+        floatingElements.forEach((element, index) => {
+          const duration = 3 + (index * 0.5);
+          const delay = index * 0.3;
+          
+          element.style.animation = `ai-float-{{ ai_gen_id }} ${duration}s ease-in-out ${delay}s infinite`;
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes ai-float-{{ ai_gen_id }} {
+            0%, 100% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-20px);
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+
+    customElements.define('ingredient-transparency-{{ ai_gen_id }}', IngredientTransparency{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Ingredient transparency",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero banner"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "hero_headline",
+      "label": "Headline",
+      "default": "There's A New Way To Support Your Joints"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "benefit_1_text",
+      "label": "Benefit 1",
+      "default": "Clinically proven ingredients"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "benefit_2_text",
+      "label": "Benefit 2",
+      "default": "100% natural and organic"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "benefit_3_text",
+      "label": "Benefit 3",
+      "default": "Made in USA with quality standards"
+    },
+    {
+      "type": "range",
+      "id": "headline_size",
+      "label": "Headline size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "benefit_text_size",
+      "label": "Benefit text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "benefit_icon_size",
+      "label": "Benefit icon size",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Hero CTA button"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "cta_text_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "cta_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "Button background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "Button text",
+      "default": "#2D5F3F"
+    },
+    {
+      "type": "color",
+      "id": "cta_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#F0F0F0"
+    },
+    {
+      "type": "color",
+      "id": "cta_hover_text_color",
+      "label": "Button hover text",
+      "default": "#2D5F3F"
+    },
+    {
+      "type": "header",
+      "content": "Hero images"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_product_image",
+      "label": "Main product image"
+    },
+    {
+      "type": "image_picker",
+      "id": "floating_image_1",
+      "label": "Floating ingredient 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "floating_image_2",
+      "label": "Floating ingredient 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "floating_image_3",
+      "label": "Floating ingredient 3"
+    },
+    {
+      "type": "range",
+      "id": "floating_image_size",
+      "label": "Floating image size",
+      "min": 60,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Hero colors"
+    },
+    {
+      "type": "color",
+      "id": "hero_gradient_start",
+      "label": "Gradient start",
+      "default": "#4A9B6B"
+    },
+    {
+      "type": "color",
+      "id": "hero_gradient_end",
+      "label": "Gradient end",
+      "default": "#6BBF8F"
+    },
+    {
+      "type": "color",
+      "id": "hero_text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "benefit_icon_bg",
+      "label": "Benefit icon background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "benefit_icon_color",
+      "label": "Benefit icon color",
+      "default": "#4A9B6B"
+    },
+    {
+      "type": "header",
+      "content": "Trust bar"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "trust_bar_text",
+      "label": "Trust bar text",
+      "default": "We Believe In Ingredient Transparency & Source Only The Highest Quality Ingredients"
+    },
+    {
+      "type": "range",
+      "id": "trust_bar_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "trust_bar_bg",
+      "label": "Background",
+      "default": "#2D3E3F"
+    },
+    {
+      "type": "color",
+      "id": "trust_bar_text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Feature 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_1_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_1_title",
+      "label": "Title",
+      "default": "Supplements Enriched with Whole Foods"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_1_text",
+      "label": "Description",
+      "default": "Our formulas combine essential nutrients with real food ingredients for better absorption."
+    },
+    {
+      "type": "header",
+      "content": "Feature 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_2_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_2_title",
+      "label": "Title",
+      "default": "No Fillers, Preservatives or Artificial Additives"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_2_text",
+      "label": "Description",
+      "default": "Pure, clean ingredients with nothing artificial. Just what your body needs and nothing it doesn't."
+    },
+    {
+      "type": "header",
+      "content": "Feature 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_3_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_3_title",
+      "label": "Title",
+      "default": "Research-Backed Ingredients"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_3_text",
+      "label": "Description",
+      "default": "Every ingredient is supported by scientific research and clinical studies for proven effectiveness."
+    },
+    {
+      "type": "header",
+      "content": "Features style"
+    },
+    {
+      "type": "range",
+      "id": "feature_icon_size",
+      "label": "Icon size",
+      "min": 50,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size",
+      "label": "Title size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "features_bg",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "features_text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_bg",
+      "label": "Icon background",
+      "default": "#E8F5E9"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_color",
+      "label": "Icon color",
+      "default": "#4A9B6B"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredient transparency"
+    }
+  ]
+}
 {% endschema %}
