@@ -18,7 +18,7 @@
         "video_1": "shopify://files/videos/tmpz0grcsit.mp4",
         "media_type_2": "video",
         "video_2": "shopify://files/videos/motion2Fast_SceneInside_a_parked_car_at_night_during_heavy_rai_0.mp4",
-        "stack_media_on_mobile": false,
+        "stack_media_on_mobile": true,
         "custom_mobile_media": false,
         "media_type_1_mobile": "image",
         "media_type_2_mobile": "image",
