@@ -316,12 +316,28 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
+    },
+    "therapy_showcase_YcNcyK": {
+      "type": "therapy-showcase",
+      "name": "LED Therapy Showcase",
+      "settings": {
+        "heading": "00d0d0",
+        "product_image": "shopify://shop_images/Kala_Therapy_Hat_1_1.webp",
+        "model_image_1": "shopify://shop_images/Kala_Therapy_Hat_2.webp",
+        "model_image_2": "shopify://shop_images/image_9.png",
+        "led_closeup": "shopify://shop_images/Frame_2087328179.png",
+        "bg_color": "#f5f5f5",
+        "text_color": "#000000",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "product_list_TAdRxG",
     "hero_rPBehM",
-    "therapy_showcase_LMF8Bk"
+    "therapy_showcase_LMF8Bk",
+    "therapy_showcase_YcNcyK"
   ]
 }
