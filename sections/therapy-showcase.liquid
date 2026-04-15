@@ -1,0 +1,267 @@
+{% schema %}
+{
+  "name": "LED Therapy Showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Clinical-Grade. Expert-Tested. Canadian-Made."
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image (LED Cap Layout)"
+    },
+    {
+      "type": "image_picker",
+      "id": "model_image_1",
+      "label": "Model Image 1 (Cap Worn)"
+    },
+    {
+      "type": "image_picker",
+      "id": "model_image_2",
+      "label": "Model Image 2 (Therapy in Use)"
+    },
+    {
+      "type": "image_picker",
+      "id": "led_closeup",
+      "label": "LED Close-up Image"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "LED Therapy Showcase"
+    }
+  ]
+}
+{% endschema %}
+
+{% if product.handle == 'kala-therapy-hat' %}
+<style>
+  .led-therapy-section {
+    background-color: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    color: {{ section.settings.text_color }};
+  }
+
+  .led-therapy-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .led-therapy-heading {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+    max-width: 570px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .led-therapy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .led-product-card,
+  .led-model-grid {
+    {% comment %} background: white; {% endcomment %}
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    max-height: 570px;
+  }
+
+  .led-product-card {
+    {% comment %} padding: 40px; {% endcomment %}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 5px 13.1px 0px #0000001A;
+  }
+
+  .led-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    {% comment %} max-width: 450px; {% endcomment %}
+  }
+
+  .led-model-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .led-model-item {
+    position: relative;
+    overflow: hidden;
+    width:calc(50% - 4px);
+    max-height:246px; 
+    border-radius: 20px;
+    {% comment %} box-shadow: 1px 0px 13.1px 0px #0000001A; {% endcomment %}
+
+  }
+
+  .led-model-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+  }
+
+  .led-model-item:first-child {
+    width: 100%;
+    max-height:316px;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .led-therapy-heading {
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .led-therapy-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .led-product-card {
+      {% comment %} padding: 30px 20px; {% endcomment %}
+    }
+
+    .led-product-image {
+      max-width: 100%;
+    }
+
+    .led-model-grid {
+      gap: 8px;
+    }
+
+    .led-model-item:first-child {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .led-model-item {
+      min-height: 200px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .led-therapy-section {
+      padding: 40px 0px;
+    }
+
+    .led-therapy-heading {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+
+  }
+</style>
+
+<section class="led-therapy-section section section--page-width">
+  <div class="led-therapy-container">
+    {% if section.settings.heading != blank %}
+      <h2 class="led-therapy-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="led-therapy-grid">
+      <!-- Product Image Card -->
+      <div class="led-product-card">
+        {% if section.settings.product_image %}
+          <img 
+            src="{{ section.settings.product_image | img_url: 'master' }}" 
+            alt="LED Therapy Cap"
+            class="led-product-image"
+            loading="lazy"
+          >
+        {% else %}
+          <div style="width: 100%; padding-top: 60%; background: #e0e0e0; border-radius: 8px;"></div>
+        {% endif %}
+      </div>
+
+      <!-- Model Images Grid -->
+      <div class="led-model-grid">
+        <div class="led-model-item">
+          {% if section.settings.model_image_1 %}
+            <img 
+              src="{{ section.settings.model_image_1 | img_url: 'master' }}" 
+              alt="Model wearing LED therapy cap"
+              loading="lazy"
+            >
+          {% else %}
+            <div style="width: 100%; height: 100%; background: #e0e0e0;"></div>
+          {% endif %}
+        </div>
+
+        <div class="led-model-item">
+          {% if section.settings.model_image_2 %}
+            <img 
+              src="{{ section.settings.model_image_2 | img_url: 'master' }}" 
+              alt="LED therapy in use"
+              loading="lazy"
+            >
+          {% else %}
+            <div style="width: 100%; height: 100%; background: #e0e0e0;"></div>
+          {% endif %}
+        </div>
+
+        <div class="led-model-item">
+          {% if section.settings.led_closeup %}
+            <img 
+              src="{{ section.settings.led_closeup | img_url: 'master' }}" 
+              alt="LED close-up"
+              loading="lazy"
+            >
+          {% else %}
+            <div style="width: 100%; height: 100%; background: #e0e0e0;"></div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
