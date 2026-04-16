@@ -142,8 +142,8 @@
 
   /* ── Masonry Grid ── */
   .rm__grid {
-    column-count: var(--rm-cols-desktop);
-    column-gap: var(--rm-gap-desktop);
+    display: flex;
+    flex-wrap: wrap;
   }
   @media (max-width: 989px) {
     .rm__grid { column-count: var(--rm-cols-tablet); }
@@ -166,7 +166,7 @@
     margin-bottom: var(--rm-gap-desktop);
     transition: transform .25s ease, box-shadow .25s ease;
     display: inline-block; /* Masonry requirement */
-    width: 100%;
+    width: calc(25% - 20px);
     box-sizing: border-box;
   }
   @media (max-width: 749px) {
