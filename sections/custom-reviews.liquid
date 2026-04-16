@@ -1,0 +1,449 @@
+{% comment %}
+  Section: Custom Reviews with Masonry
+  Theme: Horizon Inspired
+  Author: User Request
+{% endcomment %}
+
+{% style %}
+  /* Scoped CSS for this section */
+  #shopify-section-{{ section.id }} {
+    --section-bg: {{ section.settings.background_color }};
+    --section-text: {{ section.settings.text_color }};
+    --section-heading: {{ section.settings.heading_color }};
+    --desktop-font-size: {{ section.settings.desktop_font_size }}px;
+    --mobile-font-size: {{ section.settings.mobile_font_size }}px;
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    --spacing-unit: 20px;
+    background-color: var(--section-bg);
+    color: var(--section-text);
+    padding: 60px 0;
+    transition: background 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .custom-reviews-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+  }
+
+  #shopify-section-{{ section.id }} .custom-reviews-title {
+    font-size: var(--desktop-font-size);
+    color: var(--section-heading);
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .custom-reviews-desc {
+    font-size: 18px;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  /* Masonry Grid Layout */
+  #shopify-section-{{ section.id }} .reviews-masonry-grid {
+    position: relative;
+    width: 100%;
+    /* Height will be set by JS */
+  }
+
+  /* Individual Review Card */
+  #shopify-section-{{ section.id }} .review-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: var(--spacing-unit);
+    box-shadow: var(--card-shadow);
+    position: absolute; /* Required for Masonry JS */
+    top: 0;
+    left: 0;
+    width: 100%; /* Will be resized by JS based on columns */
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  /* Card Content Styling */
+  #shopify-section-{{ section.id }} .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  #shopify-section-{{ section.id }} .stars {
+    color: #FFC107;
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .verified-badge {
+    background-color: #F0F2F5;
+    color: #5C6A7F;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  #shopify-section-{{ section.id }} .review-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: #1A1A1A;
+  }
+
+  #shopify-section-{{ section.id }} .review-content {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+  }
+
+  #shopify-section-{{ section.id }} .review-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    object-fit: cover;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .review-footer {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: auto;
+  }
+
+  #shopify-section-{{ section.id }} .reviewer-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+  }
+
+  /* CTA Button */
+  #shopify-section-{{ section.id }} .reviews-cta-wrapper {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .btn-reviews {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings_button_text_color }};
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  #shopify-section-{{ section.id }} .btn-reviews:hover {
+    background-color: transparent;
+    border-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_bg_color }};
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .custom-reviews-title {
+      font-size: var(--mobile-font-size);
+    }
+    
+    #shopify-section-{{ section.id }} {
+      padding: 40px 0;
+    }
+
+    /* Mobile: JS handles column count, CSS ensures width fits */
+    #shopify-section-{{ section.id }} .review-card {
+       /* Position absolute handled by JS, reset for fallback if JS fails */
+       position: relative; 
+       left: auto !important;
+       top: auto !important;
+    }
+  }
+{% endstyle %}
+
+<div class="section--page-width custom-reviews-section">
+  
+  <div class="custom-reviews-header">
+    {% if section.settings.title != blank %}
+      <h2 class="custom-reviews-title">{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <p class="custom-reviews-desc">{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Masonry Grid Container -->
+  <div class="reviews-masonry-grid" id="masonry-grid-{{ section.id }}">
+    {% for block in section.blocks %}
+      <div class="review-card" {{ block.shopify_attributes }}>
+        
+        <div class="review-header">
+          <div class="stars">
+            {% assign rating = block.settings.rating %}
+            {% for i in (1..5) %}
+              {% if i <= rating %}★{% else %}☆{% endif %}
+            {% endfor %}
+          </div>
+          {% if block.settings.verified %}
+            <span class="verified-badge">Verified Buyer</span>
+          {% endif %}
+        </div>
+
+        {% if block.settings.review_title != blank %}
+          <h3 class="review-title">{{ block.settings.review_title }}</h3>
+        {% endif %}
+
+        {% if block.settings.review_image != blank %}
+          <img 
+            src="{{ block.settings.review_image | image_url: width: 600 }}" 
+            alt="{{ block.settings.review_title | escape }}" 
+            class="review-image"
+            loading="lazy"
+            width="{{ block.settings.review_image.width }}"
+            height="{{ block.settings.review_image.height }}"
+          >
+        {% endif %}
+
+        {% if block.settings.review_content != blank %}
+          <div class="review-content">{{ block.settings.review_content }}</div>
+        {% endif %}
+
+        <div class="review-footer">
+          <span class="reviewer-name">{{ block.settings.customer_name }}</span>
+        </div>
+
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="reviews-cta-wrapper">
+    <a href="{{ section.settings.button_link }}" class="btn-reviews">{{ section.settings.button_label }}</a>
+  </div>
+
+</div>
+
+<!-- Masonry JS Implementation -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const gridId = 'masonry-grid-{{ section.id }}';
+    const grid = document.getElementById(gridId);
+    
+    if (!grid) return;
+
+    const items = Array.from(grid.children);
+    let resizeTimeout;
+
+    function layoutMasonry() {
+      const gridWidth = grid.offsetWidth;
+      // Column configuration based on screen width
+      let columnCount = 3;
+      if (gridWidth < 768) {
+        columnCount = 1;
+      } else if (gridWidth < 1024) {
+        columnCount = 2;
+      }
+
+      const columnWidth = gridWidth / columnCount;
+      const columnHeights = new Array(columnCount).fill(0);
+
+      items.forEach((item) => {
+        // Reset position to calculate height correctly
+        item.style.position = 'absolute';
+        item.style.width = `${columnWidth}px`;
+        
+        // Find the shortest column
+        const minHeight = Math.min(...columnHeights);
+        const columnIndex = columnHeights.indexOf(minHeight);
+
+        // Position the item
+        item.style.left = `${columnIndex * columnWidth}px`;
+        item.style.top = `${minHeight}px`;
+
+        // Update column height
+        columnHeights[columnIndex] += item.offsetHeight + 20; // 20px is the gap
+      });
+
+      // Set grid height to the tallest column
+      grid.style.height = `${Math.max(...columnHeights)}px`;
+    }
+
+    // Initial layout
+    layoutMasonry();
+
+    // Re-layout on resize with debounce
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(layoutMasonry, 200);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Masonry Reviews",
+  "tag": "section",
+  "class": "section-custom-reviews",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Join 320,000+ happy customers"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Subheading / Content",
+      "default": "Proudly engineered in Canada. We are committed to delivering medical grade quality products."
+    },
+    {
+      "type": "header",
+      "content": "Typography & Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "desktop_font_size",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop Heading Font Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "min": 16,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Heading Font Size",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Text",
+      "default": "View all reviews"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "settings_button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer Name",
+          "default": "Jane Doe"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show Verified Badge",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "review_title",
+          "label": "Review Title",
+          "default": "Love the red light therapy!"
+        },
+        {
+          "type": "textarea",
+          "id": "review_content",
+          "label": "Review Content",
+          "default": "I've been using this mask for two weeks now and I can already see a difference in my skin texture. The cooling function is amazing."
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image",
+          "label": "Review Image (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Masonry Reviews",
+      "blocks": [
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
