@@ -331,53 +331,6 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
-    },
-    "custom_reviews_EQYUcx": {
-      "type": "custom-reviews",
-      "blocks": {
-        "review_RGCaPx": {
-          "type": "review",
-          "settings": {
-            "name": "John Doe",
-            "text": "Amazing product!",
-            "image": "shopify://shop_images/Rectangle_1463_2.png"
-          }
-        },
-        "review_zLJrhe": {
-          "type": "review",
-          "settings": {
-            "name": "John Doe",
-            "text": "Amazing product!",
-            "image": "shopify://shop_images/Rectangle_1463_1.png"
-          }
-        },
-        "review_HFWatT": {
-          "type": "review",
-          "settings": {
-            "name": "John Doe",
-            "text": "Amazing product!",
-            "image": "shopify://shop_images/Rectangle_1463.png"
-          }
-        }
-      },
-      "block_order": [
-        "review_RGCaPx",
-        "review_zLJrhe",
-        "review_HFWatT"
-      ],
-      "name": "Custom Masonry Reviews",
-      "settings": {
-        "title": "Join 320,000+ happy customers",
-        "content": "Proudly engineered in Canada...",
-        "title_color": "#000000",
-        "title_size": 32,
-        "title_size_mobile": 24,
-        "text_color": "#333333",
-        "text_size": 16,
-        "text_size_mobile": 14,
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
     }
   },
   "order": [
@@ -385,7 +338,6 @@
     "product_list_TAdRxG",
     "hero_rPBehM",
     "therapy_showcase_LMF8Bk",
-    "therapy_showcase_YcNcyK",
-    "custom_reviews_EQYUcx"
+    "therapy_showcase_YcNcyK"
   ]
 }
