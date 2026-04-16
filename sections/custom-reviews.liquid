@@ -317,7 +317,6 @@
           {%- liquid
             assign rating          = block.settings.star_rating | plus: 0
             assign initials        = block.settings.reviewer_name | slice: 0, 1 | upcase
-            assign color_idx       = forloop.index0 | modulo: 10
             assign avatar_alt      = block.settings.reviewer_name | escape
             assign review_img_alt  = block.settings.review_title | escape
           -%}
