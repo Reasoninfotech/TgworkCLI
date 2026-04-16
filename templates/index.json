@@ -453,7 +453,7 @@
         "subtitle_color": "#555555",
         "columns_desktop": 4,
         "columns_tablet": 2,
-        "columns_mobile": "1",
+        "columns_mobile": "2",
         "gap_desktop": 16,
         "gap_mobile": 12,
         "card_bg_color": "#ffffff",
