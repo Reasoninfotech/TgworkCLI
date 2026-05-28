@@ -6,25 +6,22 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
-    {% if customer and customer.tags contains 'userrol' %}
-
-  {{ article.content }}
-
-{% else %}
-
-  <h2>Access Denied</h2>
-  <p>You are not authorized to view this page.</p>
-
-{% endif %}
+    
     <script>
-      window.onload = function () {
-        {% if customer and customer.tags contains 'userrol' %}
-          window.location.href = "https://tg-work.myshopify.com/blogs/news/blog-post";
-        {% else %}
-          window.location.href = "javascript:void(0)";
-        {% endif %}
-      };
-    </script>
+          window.onload = function () {
+            {% if customer %}
+              {% if customer.tags contains 'userrol' %}
+                window.location.href = "https://tg-work.myshopify.com/blogs/news/blog-post";
+              {% else %}
+                // Customer login chhe pan tag nathi - koi action nahi
+                void(0);
+              {% endif %}
+            {% else %}
+              // Customer login j nathi - koi action nahi
+              void(0);
+            {% endif %}
+          };
+        </script>
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
