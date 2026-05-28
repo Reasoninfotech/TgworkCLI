@@ -22,6 +22,14 @@
             {% endif %}
           };
         </script> {% endcomment %}
+        {% if request.page_type == 'page' and page.handle == 'about-us' %}
+  {% unless customer and customer.tags contains 'userrol' %}
+    <script>
+      // જો customer પાસે 'userrol' ટેગ ન હોય અથવા તે લોગીન ન હોય, તો સીધા હોમ પેજ પર મોકલી દો
+      window.location.replace('/');
+    </script>
+  {% endunless %}
+{% endif %}
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
