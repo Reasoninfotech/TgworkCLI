@@ -48,6 +48,7 @@
         "heading",
         "page-content"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "gap": 32,
@@ -55,9 +56,157 @@
         "padding-block-start": 40,
         "padding-block-end": 80
       }
+    },
+    "custom_reviews_YrMRmQ": {
+      "type": "custom-reviews",
+      "blocks": {
+        "review_QbXtkF": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Raquel S.",
+            "show_verified": true,
+            "verified_label": "Verified buyer",
+            "star_rating": 5,
+            "review_title": "Great Red/Blue Light Mask",
+            "review_text": "I've had the red light panel for a little over a year and use it when I am getting ready for bed or walking on my walking pad. I decided I also wanted to get a mask to help target my face directly and I'm very happy that I went with this one. The material is flexible silicone and has adjustable straps to fit any sized head. It's very easy to clean and to use. I've been dealing with acne on my forehead and it has helped to clear it up much faster than without it. I highly recommend."
+          }
+        },
+        "review_yhTwNb": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Jessica W.",
+            "show_verified": true,
+            "verified_label": "Verified buyer",
+            "star_rating": 5,
+            "review_title": "Love the Cooldown Feature",
+            "review_text": "The integrated cooling system is a nice touch. It keeps the device comfortable to use even during longer sessions."
+          }
+        },
+        "review_pXVPAA": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Michael C.",
+            "show_verified": true,
+            "verified_label": "Verified buyer",
+            "star_rating": 4,
+            "review_title": "Device feels premium, solid and light is very bright",
+            "review_text": "Overall device feels premium, solid and light is very bright. The unit itself came with a small chip on the side which is disappointing. Also, the case it comes in smells horrible and is off gassing. The stand hinge is weak and only supports the device at about 75–90 degree angles."
+          }
+        },
+        "review_zq3VEy": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Alan M.",
+            "show_verified": true,
+            "verified_label": "Verified buyer",
+            "star_rating": 5,
+            "review_title": "Everything I Hoped For",
+            "review_text": "This is my first time using a red light therapy device, but after my first few weeks I can say that I am hooked. I will be looking to purchase a second unit. The pro works well but have to treat yourself in sections which could be an advantage for some applications."
+          }
+        },
+        "review_Ge3yX8": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Brian F.",
+            "show_verified": true,
+            "verified_label": "Verified buyer",
+            "star_rating": 5,
+            "review_title": "Love my red light mini",
+            "review_text": "Saw this review request while using my new Kala Pro Panel on a pesky knee. For over three years I've used the Mini on sore joints and pain points. I have multiple chronic injuries from a car crash and a life as a young athlete. I've recommended Kala products for years and will continue to do so."
+          }
+        },
+        "review_87ib6J": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Ava P.",
+            "show_verified": true,
+            "verified_label": "Verified buyer",
+            "star_rating": 5,
+            "review_title": "Best Investment in My Skin Health",
+            "review_text": "I bought the Kala Therapy Wand on a whim, and I'm so glad I did! The combination of red and blue light therapy has done wonders for my skin. My complexion is clearer, my fine lines are less noticeable, and I love that it's clinically proven and dermatologist-recommended."
+          }
+        },
+        "review_9ETUHt": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Todd S.",
+            "show_verified": true,
+            "verified_label": "Verified buyer",
+            "star_rating": 5,
+            "review_title": "Everything I Hoped For",
+            "review_text": "Excellent build quality. Very quiet. Powerful. I will joyfully use this unit for many years."
+          }
+        },
+        "review_k3JbhT": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Shannon G.",
+            "show_verified": true,
+            "verified_label": "Verified buyer",
+            "star_rating": 5,
+            "review_title": "I love it!",
+            "review_text": "I really love this device. I currently am a certified laser technician and do treatments in a professional setting. I am blown away by the results on my skin from daily use of this mask. The customer service and ease of purchase was excellent."
+          }
+        }
+      },
+      "block_order": [
+        "review_QbXtkF",
+        "review_yhTwNb",
+        "review_pXVPAA",
+        "review_zq3VEy",
+        "review_Ge3yX8",
+        "review_87ib6J",
+        "review_9ETUHt",
+        "review_k3JbhT"
+      ],
+      "name": "Reviews Masonry",
+      "settings": {
+        "show_badge": true,
+        "title": "Join 320,000+ happy customers",
+        "subtitle": "Proudly engineered in Canada, Kala is committed to delivering medical grade quality products.",
+        "title_size_desktop": 40,
+        "subtitle_size_desktop": 16,
+        "title_size_mobile": 28,
+        "subtitle_size_mobile": 14,
+        "bg_color": "#f5f5f5",
+        "star_color": "#f4a716",
+        "title_color": "#1a1a1a",
+        "subtitle_color": "#555555",
+        "columns_desktop": 4,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "gap_desktop": 16,
+        "gap_mobile": 12,
+        "card_bg_color": "#ffffff",
+        "card_border_radius": 12,
+        "card_shadow": "soft",
+        "card_border_enable": false,
+        "card_border_color": "#e0e0e0",
+        "reviewer_name_size_desktop": 14,
+        "review_title_size_desktop": 14,
+        "review_text_size_desktop": 13,
+        "reviewer_name_size_mobile": 13,
+        "review_title_size_mobile": 13,
+        "review_text_size_mobile": 12,
+        "reviewer_name_color": "#1a1a1a",
+        "review_title_color": "#1a1a1a",
+        "review_text_color": "#444444",
+        "verified_color": "#2e7d32",
+        "show_cta_button": true,
+        "cta_label": "View all reviews",
+        "cta_url": "",
+        "cta_bg_color": "#1a1a1a",
+        "cta_text_color": "#ffffff",
+        "cta_border_radius": 6,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 36
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_reviews_YrMRmQ"
   ]
 }
