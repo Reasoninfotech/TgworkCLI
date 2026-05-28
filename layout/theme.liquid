@@ -6,6 +6,17 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
+    {% if customer %}
+      {% assign customer_tags = customer.tags | join: ',' | downcase %}
+      {% if customer_tags contains 'userrol' %}
+        <a
+          href="https://tg-work.myshopify.com/blogs/news/blog-post"
+          style="display:inline-block; padding:10px 20px; background-color:#000; color:#fff; text-decoration:none; border-radius:5px;"
+        >
+          Read Blog Post
+        </a>
+      {% endif %}
+    {% endif %}
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
