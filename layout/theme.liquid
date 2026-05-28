@@ -9,6 +9,7 @@
     <script>
       window.onload = function () {
         {% assign customer_tags = customer.tags | join: ',' | downcase %}
+        ----------------{{ customer_tags }}
 
         {% if customer and customer_tags contains 'userrol' %}
           document.getElementById("blogBtn").href = "https://tg-work.myshopify.com/blogs/news/blog-post";
