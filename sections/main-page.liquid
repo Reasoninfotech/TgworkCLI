@@ -1,6 +1,6 @@
 
 
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+{% comment %} <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div class="section page-width-content color-{{ section.settings.color_scheme }}">
   <div
     class="
@@ -15,9 +15,9 @@
       {% render 'spacing-style', settings: section.settings %}
     "
   >
-    {% comment %} {% content_for 'blocks' %} {% endcomment %}
+    {% content_for 'blocks' %}
   </div>
-</div>
+</div> {% endcomment %}
 
 {% schema %}
 {
