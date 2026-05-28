@@ -8,12 +8,10 @@
   <head>
     <script>
       window.onload = function () {
-        {% assign customer_tags = customer.tags | join: ',' | downcase %}
-
-        {% if customer and customer_tags contains 'userrol' %}
-          document.getElementById("blogBtn").href = "https://tg-work.myshopify.com/blogs/news/blog-post";
+        {% if customer and customer.tags contains 'userrol' %}
+          window.location.href = "https://tg-work.myshopify.com/blogs/news/blog-post";
         {% else %}
-          document.getElementById("blogBtn").href = "javascript:void(0)";
+          window.location.href = "javascript:void(0)";
         {% endif %}
       };
     </script>
