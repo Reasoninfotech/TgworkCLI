@@ -7,7 +7,7 @@
 >
   <head>
     
-    <script>
+    {% comment %} <script>
           window.onload = function () {
             {% if customer %}
               {% if customer.tags contains 'userrol' %}
@@ -21,7 +21,7 @@
               void(0);
             {% endif %}
           };
-        </script>
+        </script> {% endcomment %}
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
