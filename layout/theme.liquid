@@ -6,6 +6,8 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
+    {% assign customer_tags = customer.tags | join: ',' | downcase %}
+        ----------------{{ customer_tags }}
     <script>
       window.onload = function () {
         {% assign customer_tags = customer.tags | join: ',' | downcase %}
