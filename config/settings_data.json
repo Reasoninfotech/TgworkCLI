@@ -81,10 +81,13 @@
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
     "blocks": {
-      "17595556821664008138": {
-        "type": "shopify://apps/zoorix-cross-sell/blocks/zoorix-head/51fffd07-f9df-4d6a-b901-6d14b243dcad",
+      "18228966181090706294": {
+        "type": "shopify://apps/selleasy/blocks/app-embed/790c1a03-a71f-4bc1-9869-00dad526d3c2",
         "disabled": false,
-        "settings": {}
+        "settings": {
+          "storefrontAccessToken": "",
+          "scriptInitMode": "immediate"
+        }
       }
     },
     "color_schemes": {
