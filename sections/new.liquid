@@ -1,7 +1,6 @@
 {%- liquid
   assign sid = section.id
 -%}
-
 <style>
   #shopify-section-{{ sid }} {
     --tc-pt:               {{ section.settings.padding_top }}px;
@@ -29,24 +28,20 @@
     --tc-link-fs-m:        {{ section.settings.card_link_font_size_mobile }}px;
     --tc-hover-scale:      {{ section.settings.image_hover_scale | divided_by: 100.0 }};
   }
-
   .tc-section {
     background: var(--tc-section-bg);
     padding-top: var(--tc-pt);
     padding-bottom: var(--tc-pb);
   }
-
   .tc-container {
     max-width: {{ section.settings.container_max_width }}px;
     margin-inline: auto;
     padding-inline: {{ section.settings.container_padding }}px;
   }
-
   .tc-header {
     margin-bottom: {{ section.settings.header_bottom_gap }}px;
     text-align: var(--tc-title-align);
   }
-
   .tc-title {
     color: var(--tc-title-color);
     font-size: var(--tc-title-fs);
@@ -56,7 +51,6 @@
     letter-spacing: {{ section.settings.title_letter_spacing }}em;
     {% if section.settings.title_uppercase %}text-transform: uppercase;{% endif %}
   }
-
   .tc-subtitle {
     color: var(--tc-sub-color);
     font-size: var(--tc-sub-fs);
