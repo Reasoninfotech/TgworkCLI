@@ -224,6 +224,7 @@
             },
             "selleasy_lb_upsell_widget_cpac_haAWtb": {
               "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-cpac/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+              "disabled": true,
               "settings": {}
             },
             "text_aEtTtq": {
