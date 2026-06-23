@@ -326,7 +326,6 @@
         {%- endunless -%}
       </div>
     {%- endunless -%}
-
     {%- if section.blocks.size > 0 -%}
       <div class="tc-grid tc-grid--{{ section.settings.layout_style }}">
 
@@ -352,7 +351,6 @@
               class="tc-card-inner"
               href="{{ block.settings.link | default: '#' }}"
             >
-
               <div class="tc-image-wrap{% if block.settings.image == blank %} tc-placeholder{% endif %}">
                 {%- if block.settings.image != blank -%}
                   {%- assign img_alt = block.settings.image.alt | default: block.settings.title | escape -%}
@@ -381,17 +379,13 @@
                   {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
                 {%- endif -%}
               </div>
-
               <div class="tc-overlay" role="presentation"></div>
-
               {%- if section.settings.show_gradient_overlay -%}
                 <div class="tc-overlay-gradient" role="presentation"></div>
               {%- endif -%}
-
               {%- if block.settings.badge_text != blank -%}
                 <span class="tc-badge">{{ block.settings.badge_text }}</span>
               {%- endif -%}
-
               <div class="tc-card-content">
                 {%- unless block.settings.title == blank -%}
                   <p class="tc-card-title"
@@ -403,7 +397,6 @@
                     {{- block.settings.title -}}
                   </p>
                 {%- endunless -%}
-
                 {%- unless block.settings.link_label == blank -%}
                   <span class="tc-card-link"
                     style="
@@ -419,15 +412,11 @@
                   </span>
                 {%- endunless -%}
               </div>
-
             </a>
           </div>
         {%- endfor -%}
-
       </div>
-
     {%- else -%}
-
       <div class="tc-grid tc-grid--featured-left">
         {%- for i in (1..5) -%}
           <div class="tc-card" style="min-height:{{ section.settings.card_min_height }}px;">
@@ -450,13 +439,9 @@
           </div>
         {%- endfor -%}
       </div>
-
     {%- endif -%}
-
   </div>
 </section>
-
-
 {% schema %}
 {
   "name": "Top Categories",
