@@ -568,6 +568,7 @@
         "category_card_TYJWcW",
         "category_card_7cj8KR"
       ],
+      "disabled": true,
       "name": "Top Categories",
       "settings": {
         "layout_style": "featured-left",
